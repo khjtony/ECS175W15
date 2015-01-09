@@ -1,0 +1,109 @@
+Discussion 1 - January 8, 2015
+
+1. Discussion is held in 158 Olson, 4:10-5pm every Wednesday
+	- my office hours are from 5-7pm every Wednesday, right after discussion
+		-held in 55 Kemper
+
+2. Here is a rough estimate of the chapters that are relevant to each topic we discuss in class
+
+	- the introductory OpenGL material starts at Ch 3.
+	- the lectures: started with Ch 6 lines, Ch 4 polygon fill, then Ch 7, 2D transformations, Ch 8 clipping.
+				Next we'll do parts of Ch 9 3d transformation and Ch 10 projections, Ch 11, 3d clipping.
+				We'll do curved surfaces and lines in Ch 13/ Ch 14.
+				Lighting starts at Ch 17. 
+
+ The book has a lot of good code that you can use the your projects, so please look through the chapters over the next 3 months. 
+
+3. Projects
+  3a.
+	- 5 projects, last one is optional
+	- can work in groups on the last project only.
+ 
+  3b.
+	- you can work on your projects in any language you want, but we will only officially support C/C++/Java in this class (ie, in office hours/discussion I can only help with your code in these languages)
+
+	- you can develop your code on your laptops (Mac, Windows, Unix, etc.), other work stations, CSIF machines, etc. but MAKE SURE they work on the CSIF machines. Your projects will be tested on the CSIF machines, and if they don't compile/run on these machines, you WILL GET A ZERO.
+
+	-all examples, commands, etc. will get given according to CSIF machines compatibility to ensure a baseline, your computer may behave slightly differently
+
+	- submission - you will hand in the source code, executable file and a readme using the "handin" command from command line. 
+		- 10 day late rule, 1% off per day, try not to use them
+		- last handin of the 10 days in the one that counts
+
+	- you will get specific guidelines and test samples to test your code before handing in projects to make sure you maximize your points.
+
+  3c.
+	-make sure not to use the internal OpenGL structures in your projects.
+		Ex: in project 1, do not use glBegin/GL_POLGON to draw your polygon. Instead use, glDrawPixels
+		You can use other gl commands that do not do the work for you, ex: glFlush, glClearColor, etc.
+		Starting proj 2, you can use your functions to draw polygons or you can use the built-in functions.
+
+4. OpenGL
+	4.a Basics of OpenGL 
+		-OpenGL = Open Source Graphics Library
+		-Silicon Graphics Inc - 1992
+		-managed by Khronos
+
+		-cross-language, multi-platform API
+		-basic concept: take pixels, lines, polygons, functions, etc and turns it into sequence of pixels
+		
+		-reference books for OpenGL: 
+			- The textbook: Computer Graphics with OpenGL
+			- The Red Book, The Green Book, The Blue Book, The Orange Book....
+			- the Red Book: http://www.glprogramming.com/red/
+			- other OpenGL Resources:
+
+			www.opengl.org		
+			www.opengl.org/wiki/Main_Page
+			en.wikibooks.org/wiki/OpenGL_Programming
+
+
+		-GLUT = OpenGL Utility Toolkit
+			-I/O interation; window manipulation, keyboard, mouse input
+
+	4b. Setting Up The Environment
+		- Windows, Mac, Linux (Ubuntu)
+			http://www.opengl.org/wiki/Getting_started
+
+	4c. Setting up Linux
+		-Install C,C++ compiler
+			- Open "Terminal" and enter:
+				>sudo apt-get install build-essential
+
+			(      might have to first do:
+				>sudo apt-get update     )
+
+		- FreeGLUT and OpenGL
+			- Install FreeGlut and OpenGL (not necessary in CSIF machines)
+				>sudo apt-get install freeglut3-dev
+
+			-check version: > glxinfo | grep "OpenGL version" 
+				(need version 2.1 or higher)
+
+			-COMPILING OGL CODE:
+				-textbook, Ch 3, ~pg. 40 
+				>g++ sample.cpp -lglut -lGL 
+					-linking to libraries can depend on your particular machine and set up. This is what is required in the CSIF machines. Please experiment for your particular machine or see me in office hours. 
+
+			-SAMPLE CODE IN SMARTSITE: RESOURCES->DISCUSSION1->SAMPLE.CPP
+
+4. Getting started on Project 1
+
+	4a. need to use : glDrawPixels (int width, int height, format, type, data)
+
+	4b.
+	Ex:
+		create a dynamic pixel buffer:
+			float* pixelBuffer;
+			pixelBuffer = new float[width*height*3];
+	
+			glDrawPixels(640,480,GL_RGB, GL_FLOAT, pixelbuffer);
+
+			a makePix or setPix function:
+				calculate position in 1d array from 2d location
+				set values: r,g,b in the 1d array
+					pixelBuffer[pos] = r;
+					pixelBuffer[pos+1] = g;
+					pixelBuffer[pos+2] = b;
+	4c.
+	    look at glutSwapBuffers
